@@ -6,6 +6,7 @@
 #include <string>
 #include <array>
 #include <regex>
+#include <tuple>
 
 #ifdef TARGET_OSX //sorry linux and windows folks this is macOS only
 
@@ -94,16 +95,16 @@ namespace ofxUVCProber{
         auto cams = getList();
         if (cams.size() <= i){
             std::cout<<"[ERROR] Requested device is not available!"<<std::endl;
-            return make_tuple(-1,-1);
+            return std::make_tuple(-1,-1);
         }
-        return make_tuple(std::get<1>(cams[i]),std::get<2>(cams[i]));
+        return std::make_tuple(std::get<1>(cams[i]),std::get<2>(cams[i]));
     }
     
     inline std::tuple<int,int, unsigned int> getVendorIDAndProductIDAndUniqueIDByDeviceIndex(int i){
         auto cams = getList();
         if (cams.size() <= i){
             std::cout<<"[ERROR] Requested device is not available!"<<std::endl;
-            return make_tuple(-1,-1,-1);
+            return std::make_tuple(-1,-1,-1);
         }
         
         //int hexAddrToInt = ofHexToInt(locationID);
@@ -113,7 +114,7 @@ namespace ofxUVCProber{
 //        converter >> std::hex >> uniqueID;
 
     
-        return make_tuple( std::get<1>(cams[i]), std::get<2>(cams[i]), std::get<4>(cams[i]) );
+        return std::make_tuple( std::get<1>(cams[i]), std::get<2>(cams[i]), std::get<4>(cams[i]) );
     }
     
     inline std::tuple<int,int> getFirstVendorIDAndProductID(){
@@ -131,10 +132,10 @@ namespace ofxUVCProber{
         auto cams = getList();
         for (int i = 0; i < cams.size(); i++){
             if (std::get<0>(cams[i]) == s){
-                return make_tuple(std::get<1>(cams[i]),std::get<2>(cams[i]));
+                return std::make_tuple(std::get<1>(cams[i]),std::get<2>(cams[i]));
             }
         }
-        return make_tuple(0,0);
+        return std::make_tuple(0,0);
     }
 
 inline std::tuple<int,int, unsigned int> getVendorIDAndProductIDAndUniqueIDByUID(std::string s){
@@ -153,20 +154,20 @@ inline std::tuple<int,int, unsigned int> getVendorIDAndProductIDAndUniqueIDByUID
             cout<<"std::get<2>(cams[i]) "<<std::get<2>(cams[i])<<endl;
             cout<<"std::get<3>(cams[i]) "<<std::get<3>(cams[i])<<endl;
             cout<<"std::get<4>(cams[i]) "<<std::get<4>(cams[i])<<endl;
-            return make_tuple( std::get<1>(cams[i]), std::get<2>(cams[i]), std::get<4>(cams[i]) );
+            return std::make_tuple( std::get<1>(cams[i]), std::get<2>(cams[i]), std::get<4>(cams[i]) );
         }
     }
-    return make_tuple(0,0,0);
+    return std::make_tuple(0,0,0);
 }
 
 inline std::tuple<int,int> getVendorIDAndProductIDByUID(std::string s){
     auto cams = getList();
     for (int i = 0; i < cams.size(); i++){
         if (std::get<3>(cams[i]) == s){
-            return make_tuple(std::get<1>(cams[i]),std::get<2>(cams[i]));
+            return std::make_tuple(std::get<1>(cams[i]),std::get<2>(cams[i]));
         }
     }
-    return make_tuple(0,0);
+    return std::make_tuple(0,0);
 }
     
   

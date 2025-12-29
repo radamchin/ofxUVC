@@ -12,7 +12,6 @@
 #include "ofxUVCProber.h" // <- To use the prober, you need include this header BEFORE including "ofxUVC.h"!
 #include "ofxUVC.h"
 
-#include "ofParameterGroup.h"
 #include "ofParameter.h"
 
 class UVC_controller

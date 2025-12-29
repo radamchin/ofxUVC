@@ -1,6 +1,7 @@
 #include "ofxUVC.h"
 #include "UVCCameraControl.h"
 
+
 ofxUVC::ofxUVC() {
     cameraControl = nil;
 }
@@ -268,6 +269,11 @@ bool ofxUVC::getBacklightCompensation() {
     return [(UVCCameraControl*)cameraControl getBacklightCompensation];
 }
 
+inline void setStdStringFromNSString(NSString *str, std::string &out) {
+	const char *c = str.UTF8String;
+	out = c ? c : "";
+}
+
 vector<ofxUVCControl> ofxUVC::getCameraControls() {
     vector<ofxUVCControl> result;
     
@@ -278,193 +284,194 @@ vector<ofxUVCControl> ofxUVC::getCameraControls() {
     ofxUVCControl control;
     
     // Scanning Mode
-    control.name = [cameraControls.scanningMode.name UTF8String];
+	setStdStringFromNSString(cameraControls.scanningMode.name, control.name); // Was: control.name = [cameraControls.scanningMode.name UTF8String];
     uvc_control_info_t scanningMode = cameraControls.scanningMode;
     control.status = [(UVCCameraControl*)cameraControl getInfoForControl:&scanningMode];
     result.push_back(control);
     
     // AE Mode
-    control.name = [cameraControls.aeMode.name UTF8String];
+	setStdStringFromNSString(cameraControls.aeMode.name, control.name);
     uvc_control_info_t aeMode = cameraControls.aeMode;
     control.status = [(UVCCameraControl*)cameraControl getInfoForControl:&aeMode];
     result.push_back(control);
     
     // AE Priority
-    control.name = [cameraControls.aePriority.name UTF8String];
+	setStdStringFromNSString(cameraControls.aePriority.name, control.name);
     uvc_control_info_t aePriority = cameraControls.aePriority;
     control.status = [(UVCCameraControl*)cameraControl getInfoForControl:&aePriority];
     result.push_back(control);
     
     // Exposure Time Absolute
-    control.name = [cameraControls.exposureTimeAbsolute.name UTF8String];
+	setStdStringFromNSString(cameraControls.exposureTimeAbsolute.name, control.name);
     uvc_control_info_t exposureTimeAbsolute = cameraControls.exposureTimeAbsolute;
     control.status = [(UVCCameraControl*)cameraControl getInfoForControl:&exposureTimeAbsolute];
     result.push_back(control);
     
     // Exposure Time Relative
-    control.name = [cameraControls.exposureTimeRelative.name UTF8String];
+	setStdStringFromNSString(cameraControls.exposureTimeRelative.name, control.name);
     uvc_control_info_t exposureTimeRelative = cameraControls.exposureTimeRelative;
     control.status = [(UVCCameraControl*)cameraControl getInfoForControl:&exposureTimeRelative];
     result.push_back(control);
     
     // Focus Absolute
-    control.name = [cameraControls.focusAbsolute.name UTF8String];
+	setStdStringFromNSString(cameraControls.focusAbsolute.name, control.name);
     uvc_control_info_t focusAbsolute = cameraControls.focusAbsolute;
     control.status = [(UVCCameraControl*)cameraControl getInfoForControl:&focusAbsolute];
     result.push_back(control);
     
     // Focus Relative
-    control.name = [cameraControls.focusRelative.name UTF8String];
+	setStdStringFromNSString(cameraControls.focusRelative.name, control.name);
     uvc_control_info_t focusRelative = cameraControls.focusRelative;
     control.status = [(UVCCameraControl*)cameraControl getInfoForControl:&focusRelative];
     result.push_back(control);
     
     // Focus Auto
-    control.name = [cameraControls.focusAuto.name UTF8String];
+	setStdStringFromNSString(cameraControls.focusAuto.name, control.name);
     uvc_control_info_t focusAuto = cameraControls.focusAuto;
     control.status = [(UVCCameraControl*)cameraControl getInfoForControl:&focusAuto];
     result.push_back(control);
     
     // Iris Absolute
-    control.name = [cameraControls.irisAbsolute.name UTF8String];
+	setStdStringFromNSString(cameraControls.irisAbsolute.name, control.name);
     uvc_control_info_t irisAbsolute = cameraControls.irisAbsolute;
     control.status = [(UVCCameraControl*)cameraControl getInfoForControl:&irisAbsolute];
     result.push_back(control);
     
     // Iris Relative
-    control.name = [cameraControls.irisRelative.name UTF8String];
+	setStdStringFromNSString(cameraControls.irisRelative.name, control.name);
     uvc_control_info_t irisRelative = cameraControls.irisRelative;
     control.status = [(UVCCameraControl*)cameraControl getInfoForControl:&irisRelative];
     result.push_back(control);
     
     // Brightness
-    control.name = [cameraControls.brightness.name UTF8String];
+	setStdStringFromNSString(cameraControls.brightness.name, control.name);
     uvc_control_info_t brightness = cameraControls.brightness;
     control.status = [(UVCCameraControl*)cameraControl getInfoForControl:&brightness];
     result.push_back(control);
     
     // Contrast
-    control.name = [cameraControls.contrast.name UTF8String];
+	setStdStringFromNSString(cameraControls.contrast.name, control.name);
     uvc_control_info_t contrast = cameraControls.contrast;
     control.status = [(UVCCameraControl*)cameraControl getInfoForControl:&contrast];
     result.push_back(control);
     
     // Gain
-    control.name = [cameraControls.gain.name UTF8String];
+	setStdStringFromNSString(cameraControls.gain.name, control.name);
     uvc_control_info_t gain = cameraControls.gain;
     control.status = [(UVCCameraControl*)cameraControl getInfoForControl:&gain];
     result.push_back(control);
     
     // Saturation
-    control.name = [cameraControls.saturation.name UTF8String];
+	setStdStringFromNSString(cameraControls.saturation.name, control.name);
     uvc_control_info_t saturation = cameraControls.saturation;
     control.status = [(UVCCameraControl*)cameraControl getInfoForControl:&saturation];
     result.push_back(control);
     
     // Sharpness
-    control.name = [cameraControls.sharpness.name UTF8String];
+	setStdStringFromNSString(cameraControls.sharpness.name, control.name);
     uvc_control_info_t sharpness = cameraControls.sharpness;
     control.status = [(UVCCameraControl*)cameraControl getInfoForControl:&sharpness];
     result.push_back(control);
     
     // White Balance
-    control.name = [cameraControls.whiteBalance.name UTF8String];
+	setStdStringFromNSString(cameraControls.whiteBalance.name, control.name);
     uvc_control_info_t whiteBalance = cameraControls.whiteBalance;
     control.status = [(UVCCameraControl*)cameraControl getInfoForControl:&whiteBalance];
     result.push_back(control);
     
     // Auto White Balance
-    control.name = [cameraControls.autoWhiteBalance.name UTF8String];
+	setStdStringFromNSString(cameraControls.autoWhiteBalance.name, control.name);
     uvc_control_info_t autoWhiteBalance = cameraControls.autoWhiteBalance;
     control.status = [(UVCCameraControl*)cameraControl getInfoForControl:&autoWhiteBalance];
     result.push_back(control);
     
     // Incremental Exposure
-    control.name = [cameraControls.incremental_exposure.name UTF8String];
+	setStdStringFromNSString(cameraControls.incremental_exposure.name, control.name);
     uvc_control_info_t incremental_exposure = cameraControls.incremental_exposure;
     control.status = [(UVCCameraControl*)cameraControl getInfoForControl:&incremental_exposure];
     result.push_back(control);
     
     // Power Line Frequency
-    control.name = [cameraControls.powerLineFrequency.name UTF8String];
+	setStdStringFromNSString(cameraControls.powerLineFrequency.name, control.name);
     uvc_control_info_t powerLineFrequency = cameraControls.powerLineFrequency;
     control.status = [(UVCCameraControl*)cameraControl getInfoForControl:&powerLineFrequency];
     result.push_back(control);
     
     // Backlight Compensation
-    control.name = [cameraControls.backlightCompensation.name UTF8String];
+	setStdStringFromNSString(cameraControls.backlightCompensation.name, control.name);
     uvc_control_info_t backlightCompensation = cameraControls.backlightCompensation;
     control.status = [(UVCCameraControl*)cameraControl getInfoForControl:&backlightCompensation];
     result.push_back(control);
     
     // Auto Hue
-    control.name = [cameraControls.autoHue.name UTF8String];
+	setStdStringFromNSString(cameraControls.autoHue.name, control.name);
     uvc_control_info_t autoHue = cameraControls.autoHue;
     control.status = [(UVCCameraControl*)cameraControl getInfoForControl:&autoHue];
     result.push_back(control);
     
     // Hue
-    control.name = [cameraControls.hue.name UTF8String];
+	setStdStringFromNSString(cameraControls.hue.name, control.name);
     uvc_control_info_t hue = cameraControls.hue;
     control.status = [(UVCCameraControl*)cameraControl getInfoForControl:&hue];
     result.push_back(control);
     
     // Gamma
-    control.name = [cameraControls.gamma.name UTF8String];
+	setStdStringFromNSString(cameraControls.gamma.name, control.name);
     uvc_control_info_t gamma = cameraControls.gamma;
     control.status = [(UVCCameraControl*)cameraControl getInfoForControl:&gamma];
     result.push_back(control);
     
     // Zoom Absolute
-    control.name = [cameraControls.zoomAbsolute.name UTF8String];
+	setStdStringFromNSString(cameraControls.zoomAbsolute.name, control.name);
     uvc_control_info_t zoomAbsolute = cameraControls.zoomAbsolute;
     control.status = [(UVCCameraControl*)cameraControl getInfoForControl:&zoomAbsolute];
     result.push_back(control);
     
     // Pan/Tilt Absolute
-    control.name = [cameraControls.pantiltAbsolute.name UTF8String];
+	setStdStringFromNSString(cameraControls.pantiltAbsolute.name, control.name);
     uvc_control_info_t pantiltAbsolute = cameraControls.pantiltAbsolute;
     control.status = [(UVCCameraControl*)cameraControl getInfoForControl:&pantiltAbsolute];
     result.push_back(control);
     
     // Roll Absolute
-    control.name = [cameraControls.rollAbsolute.name UTF8String];
+	setStdStringFromNSString(cameraControls.rollAbsolute.name, control.name);
     uvc_control_info_t rollAbsolute = cameraControls.rollAbsolute;
     control.status = [(UVCCameraControl*)cameraControl getInfoForControl:&rollAbsolute];
     result.push_back(control);
     
     // Roll Relative
-    control.name = [cameraControls.rollRelative.name UTF8String];
+    //control.name = [cameraControls.rollRelative.name UTF8String];
+	setStdStringFromNSString(cameraControls.rollRelative.name, control.name);
     uvc_control_info_t rollRelative = cameraControls.rollRelative;
     control.status = [(UVCCameraControl*)cameraControl getInfoForControl:&rollRelative];
     result.push_back(control);
     
     // Privacy
-    control.name = [cameraControls.privacy.name UTF8String];
+	setStdStringFromNSString(cameraControls.privacy.name, control.name);
     uvc_control_info_t privacy = cameraControls.privacy;
     control.status = [(UVCCameraControl*)cameraControl getInfoForControl:&privacy];
     result.push_back(control);
     
     // Focus Simple
-    control.name = [cameraControls.focusSimple.name UTF8String];
+	setStdStringFromNSString(cameraControls.focusSimple.name, control.name);
     uvc_control_info_t focusSimple = cameraControls.focusSimple;
     control.status = [(UVCCameraControl*)cameraControl getInfoForControl:&focusSimple];
     result.push_back(control);
     
     // Digital Window
-    control.name = [cameraControls.digitalWindow.name UTF8String];
+	setStdStringFromNSString(cameraControls.digitalWindow.name, control.name);
     uvc_control_info_t digitalWindow = cameraControls.digitalWindow;
     control.status = [(UVCCameraControl*)cameraControl getInfoForControl:&digitalWindow];
     result.push_back(control);
     
     // Region of Interest
-    control.name = [cameraControls.regionOfInterest.name UTF8String];
+	setStdStringFromNSString(cameraControls.regionOfInterest.name, control.name);
     uvc_control_info_t regionOfInterest = cameraControls.regionOfInterest;
     control.status = [(UVCCameraControl*)cameraControl getInfoForControl:&regionOfInterest];
     result.push_back(control);
     
     // LED
-    control.name = [cameraControls.led.name UTF8String];
+	setStdStringFromNSString(cameraControls.led.name, control.name);
     uvc_control_info_t led = cameraControls.led;
     control.status = [(UVCCameraControl*)cameraControl getInfoForControl:&led];
     result.push_back(control);
